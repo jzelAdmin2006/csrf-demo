@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.allopen") version "1.9.22"
+    kotlin("plugin.noarg") version "1.9.20"
     id("io.quarkus")
 }
 
@@ -19,6 +20,7 @@ dependencies {
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-spring-web")
     implementation("io.quarkus:quarkus-spring-data-jpa")
+    implementation("io.quarkus:quarkus-jdbc-h2")
     implementation("io.quarkus:quarkus-spring-boot-properties")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
@@ -48,4 +50,8 @@ allOpen {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = JavaVersion.VERSION_21.toString()
     kotlinOptions.javaParameters = true
+}
+
+noArg {
+    annotation("jakarta.persistence.Entity")
 }
